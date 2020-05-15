@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
- 
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -41,7 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Post');
     }
 
-    public function likes(){
-        return $this->hasMany('App\Like');
-    }
+    public function likes()
+{
+    return $this->belongsToMany('App\Post', 'likes', 'user_id', 'post_id');
+}
 }

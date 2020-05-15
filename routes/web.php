@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
+Route::get('like/{id}',"PagesController@like");
 Route::resource('posts','PostsController');
 /*Route::get('/users/{id}/{name}', function ($id,$name) {
     return 'This is user ' .$name. ' with an id of ' .$id;
@@ -29,3 +30,6 @@ Route::get('/about', function () {
 Auth::routes(['verify'=> true]);
 
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('post/{id}/islikedbyme', 'API\PostController@isLikedByMe');
+Route::post('post/like', 'API\PostController@like');
+Route::get('/search','PostsController@search')->name('search');

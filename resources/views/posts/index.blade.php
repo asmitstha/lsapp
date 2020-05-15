@@ -13,8 +13,9 @@
                     
                     </a>
                     <h3 class="text-center my-3">{{$post->title}}</h3>
+                    <h5 class="text-center my-3">{{$post->body}}</h5>
                     <div class="interaction">
-                        
+                    
                          {{-- <a href="{{ route('like', ['post_id' => $post->id]) }}" class="post-item">Like</a>| --}}
                        
                         <hr>
@@ -31,7 +32,7 @@
           @endif
  
     
-
+          
 {{-- 
     @if(count($posts) > 0)
         @foreach($posts as $post)
@@ -52,4 +53,28 @@
     @else
         <p>No posts found</p>
     @endif --}}
+    <script>
+        var app = angular.module("Actions", []);
+        app.controller("LikeController", function($scope, $http) {
+            
+            checkLike();
+            $scope.like = function() {
+                var post = {
+                    id: "{{ $post->id }}",
+                };
+                $http.post('/api/v1/post/like', post).success(function(result) {
+                    checkLike();
+                });
+            };
+            function checkLike(){
+                $http.get('/api/v1/post/{{ $post->id }}/islikedbyme').success(function(result) {
+                    if (result == 'true') {
+                        $scope.Like = "Delete Like";
+                    } else {
+                        $scope.Like = "Like";
+                    }
+                });
+            };
+        });
+    </script>
 @endsection

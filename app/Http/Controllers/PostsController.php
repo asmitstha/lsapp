@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
-use App\Like;
+
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
 class PostsController extends Controller
 {
     /**
@@ -176,7 +178,18 @@ class PostsController extends Controller
         return redirect('/posts')->with('success','Post Removed');
     }
    
+   
 
-      
-  
+    public function search(Request $request){
+        
+        $request->validate([
+            'query'=>'required|min:3',
+        ]);
+        
+        $query =$request->input('query');
+        $posts=Post::where('title','like',"%$query%")
+                        ->orwhere('body','like',"%$query%")->paginate(10);
+           
+        return view ('posts.search-results')->with('posts',$posts);
+    }
 }

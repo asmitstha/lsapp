@@ -6,6 +6,11 @@
            <span style="font-family:Cursive like"> Insta</span>
             {{-- {{config('app.name','LSAPP')}} --}}
         </a>
+        <form action="{{route ('search')}}" method="GET" class="search-form">
+                                      
+            <input class="form-control" name="query" id="query" value="" type="text" placeholder="Search" aria-label="Search">
+
+                </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>

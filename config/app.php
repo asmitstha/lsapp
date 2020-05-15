@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
-
+        Overtrue\LaravelFollow\FollowServiceProvider::class,
         /*
          * Package Service Providers...
          */
